@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">code</string>
+    <string name="action_settings">Settings</string>
+    <!-- Strings used for fragments for navigation -->
+
+    <string name="open_routes">Open Routes</string>
+    <string name="activity1">Activity 1</string>
+    <string name="activity2">Activity 2</string>
+    <string name="title_activity_routes_list">RoutesList</string>
+</resources>
