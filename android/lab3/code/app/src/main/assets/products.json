@@ -1,0 +1,20 @@
+[
+  {
+    "id": 0,
+    "name": "Guitar",
+    "universalProductCode": 438,
+    "producer": "China",
+    "price": 200,
+    "expirationDate": "02.12.2023",
+    "count": 2
+  },
+  {
+    "id": 1,
+    "name": "Laptop",
+    "universalProductCode": 251,
+    "producer": "Germany",
+    "price": 500,
+    "expirationDate": "01.1.2030",
+    "count": 10
+  }
+]
