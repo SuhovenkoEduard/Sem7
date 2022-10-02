@@ -6,6 +6,9 @@
         android:id="@+id/search"
         android:title="@string/search" />
     <item
+        android:id="@+id/search_with_price"
+        android:title="@string/search_with_price" />
+    <item
         android:id="@+id/full_list"
         android:title="@string/full_list" />
 </menu>

@@ -18,4 +18,8 @@
     <string name="app_label">app_label</string>
     <string name="search_hint">search_hint</string>
     <string name="full_list">Full list</string>
+    <string name="max_price">Max price</string>
+    <string name="search_by_name_and_max_price">Search by name and max price</string>
+    <string name="name">Name</string>
+    <string name="search_with_price">Search with price</string>
 </resources>

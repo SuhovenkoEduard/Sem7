@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import com.uni.lab3.model.Product;
+import com.uni.lab3.model.ProductSearchByPrice;
 import com.uni.lab3.productsReader.ProductsReader;
 
 import android.view.Menu;
@@ -45,24 +46,34 @@ public class MainActivity extends AppCompatActivity {
                 .commit();
         });
 
-        try {
-            ProductsReader productsReader = new ProductsReader(
-                    MainActivity.this,
-                    new BufferedReader(new InputStreamReader(getAssets().open("products.json"))
-                    ),
-                    (products) -> {
-                        this.products = products;
-                        setProductsInListView(products);
-
-                        Intent intent = getIntent();
-                        if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
-                            String query = intent.getStringExtra(SearchManager.QUERY);
-                            applySearchQuery(query.toLowerCase(Locale.ROOT));
-                        }
-                    });
-            productsReader.execute();
-        } catch (IOException e) {
-            e.printStackTrace();
+        if (getIntent().getSerializableExtra("products") != null) {
+            products = (Product[]) getIntent().getSerializableExtra("products");
+            if (getIntent().getSerializableExtra("searchQuery") != null) {
+                ProductSearchByPrice productSearchByPrice = (ProductSearchByPrice) getIntent().getSerializableExtra("searchQuery");
+                setSearchQueryText(productSearchByPrice.getName());
+                setMaxPriceQueryText(Integer.toString(productSearchByPrice.getMaxPrice()));
+                setProductsInListView(Arrays.stream(products).filter(product ->
+                       product.getName().toLowerCase(Locale.ROOT).contains(productSearchByPrice.getName().toLowerCase(Locale.ROOT))
+                           && product.getPrice() <= productSearchByPrice.getMaxPrice())
+                        .toArray(Product[]::new)
+                );
+            }
+            handleIntents();
+        } else {
+            try {
+                ProductsReader productsReader = new ProductsReader(
+                        MainActivity.this,
+                        new BufferedReader(new InputStreamReader(getAssets().open("products.json"))
+                        ),
+                        (products) -> {
+                            this.products = products;
+                            setProductsInListView(products);
+                            handleIntents();
+                        });
+                productsReader.execute();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -78,8 +89,15 @@ public class MainActivity extends AppCompatActivity {
             case R.id.search:
                 onSearchRequested();
                 return true;
+            case R.id.search_with_price: {
+                Intent intent = new Intent(this, ConstrainedSearch.class);
+                intent.putExtra("products", products);
+                startActivity(intent);
+                return true;
+            }
             case R.id.full_list: {
                 applySearchQuery("");
+                setMaxPriceQueryText("");
                 return true;
             }
         }
@@ -107,13 +125,33 @@ public class MainActivity extends AppCompatActivity {
         if (getFullInfoProductFragment() != null) {
             removeFullProductInfoFragment(getFullInfoProductFragment());
         }
+        setSearchQueryText(searchQuery);
+        setProductsInListView(Arrays.stream(products).filter(product -> product.getName().toLowerCase(Locale.ROOT).contains(searchQuery)).toArray(Product[]::new));
+    }
 
+    public void handleIntents() {
+        Intent intent = getIntent();
+        if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
+            String query = intent.getStringExtra(SearchManager.QUERY);
+            applySearchQuery(query.toLowerCase(Locale.ROOT));
+        }
+    }
+
+    public void setSearchQueryText(String text) {
         TextView searchQueryTextView = findViewById(R.id.searchQueryTextView);
-        if (searchQuery.isEmpty()) {
+        if (text.isEmpty()) {
             searchQueryTextView.setText("");
         } else {
-            searchQueryTextView.setText(String.format("Search query: %s", searchQuery));
+            searchQueryTextView.setText(String.format("Name: %s", text));
         }
-        setProductsInListView(Arrays.stream(products).filter(product -> product.getName().toLowerCase(Locale.ROOT).contains(searchQuery)).toArray(Product[]::new));
+    }
+
+    public void setMaxPriceQueryText(String text) {
+        TextView maxPriceTextView = findViewById(R.id.maxPriceTextView);
+        if (text.isEmpty()) {
+            maxPriceTextView.setText("");
+        } else {
+            maxPriceTextView.setText(String.format("Max price: %s", text));
+        }
     }
 }
