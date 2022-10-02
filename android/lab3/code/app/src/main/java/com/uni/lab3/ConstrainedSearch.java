@@ -9,10 +9,6 @@ import android.text.TextWatcher;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.uni.lab3.model.ProductsRepository;
-
-import javax.xml.transform.Result;
-
 public class ConstrainedSearch extends AppCompatActivity {
     private String currentName = "";
     private String lastMaxPriceString = "";
