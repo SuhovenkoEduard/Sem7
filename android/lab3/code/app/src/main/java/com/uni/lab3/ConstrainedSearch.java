@@ -17,7 +17,6 @@ import com.uni.lab3.model.ProductSearchByPrice;
 
 public class ConstrainedSearch extends AppCompatActivity {
     private Product[] products;
-    private Product product;
 
     private String currentName;
     private String lastMaxPriceString = "";
@@ -28,7 +27,6 @@ public class ConstrainedSearch extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_constrained_search);
         products = (Product[]) getIntent().getSerializableExtra("products");
-        product = (Product) getIntent().getSerializableExtra("product");
 
         EditText nameInput = findViewById(R.id.nameInput);
         EditText maxPriceInput = findViewById(R.id.maxPriceInput);
