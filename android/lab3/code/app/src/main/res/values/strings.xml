@@ -22,4 +22,8 @@
     <string name="search_by_name_and_max_price">Search by name and max price</string>
     <string name="name">Name</string>
     <string name="search_with_price">Search with price</string>
+    <string name="theme">Theme</string>
+    <string name="default_theme">Default</string>
+    <string name="red">Red</string>
+    <string name="green">Green</string>
 </resources>

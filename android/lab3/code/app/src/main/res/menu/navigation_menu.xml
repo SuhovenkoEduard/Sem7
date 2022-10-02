@@ -11,4 +11,22 @@
     <item
         android:id="@+id/full_list"
         android:title="@string/full_list" />
+    <item
+        android:id="@+id/theme_menu"
+        android:title="@string/theme"
+        >
+        <menu
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <item
+                android:id="@+id/default_theme"
+                android:title="@string/default_theme" />
+            <item
+                android:id="@+id/red_theme"
+                android:title="@string/red" />
+            <item
+                android:id="@+id/green_theme"
+                android:title="@string/green" />
+        </menu>
+    </item>
 </menu>

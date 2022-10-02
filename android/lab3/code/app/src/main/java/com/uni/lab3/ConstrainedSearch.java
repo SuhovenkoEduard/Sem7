@@ -6,31 +6,29 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.KeyEvent;
-import android.view.View;
-import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.uni.lab3.model.Product;
-import com.uni.lab3.model.ProductSearchByPrice;
+import com.uni.lab3.model.ProductsRepository;
+
+import javax.xml.transform.Result;
 
 public class ConstrainedSearch extends AppCompatActivity {
-    private Product[] products;
-
-    private String currentName;
+    private String currentName = "";
     private String lastMaxPriceString = "";
-    private int currentMaxPrice;
+    private int currentMaxPrice = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (getIntent() != null) {
+            Themes theme = (Themes) getIntent().getSerializableExtra("currentTheme");
+            setTheme(ThemesUtils.getThemeId(theme));
+        }
         setContentView(R.layout.activity_constrained_search);
-        products = (Product[]) getIntent().getSerializableExtra("products");
 
         EditText nameInput = findViewById(R.id.nameInput);
         EditText maxPriceInput = findViewById(R.id.maxPriceInput);
-
         nameInput.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
@@ -73,11 +71,16 @@ public class ConstrainedSearch extends AppCompatActivity {
 
         Button constrainedSearchButton = findViewById(R.id.constrainedSearchButton);
         constrainedSearchButton.setOnClickListener(view -> {
-            Intent mainActivity = new Intent(this, MainActivity.class);
-            mainActivity.putExtra("products", products);
-            mainActivity.putExtra("searchQuery", new ProductSearchByPrice(currentName, currentMaxPrice));
-            startActivity(mainActivity);
+            this.setResult(1, getResultIntent());
+            this.finish();
         });
+    }
+
+    public Intent getResultIntent() {
+        Intent resultIntent = new Intent();
+        resultIntent.putExtra("name", currentName);
+        resultIntent.putExtra("maxPrice", currentMaxPrice);
+        return resultIntent;
     }
 
     public static boolean isInteger(String strNum) {

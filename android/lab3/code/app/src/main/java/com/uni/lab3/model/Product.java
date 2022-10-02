@@ -20,13 +20,25 @@ public class Product implements Serializable {
     @SerializedName("count")
     private int count;
 
-    public Product(int id, String name, String producer, int price, String expirationDate, int count) {
-        this.id = id;
+    public Product(String name, String producer, int price, String expirationDate, int count) {
         this.name = name;
         this.producer = producer;
         this.price = price;
         this.expirationDate = expirationDate;
         this.count = count;
+    }
+
+    @NonNull
+    public Product clone() {
+        Product product = new Product(
+                getName(),
+                getProducer(),
+                getPrice(),
+                getExpirationDate(),
+                getCount()
+        );
+        product.setId(getId());
+        return product;
     }
 
     public int getId() {
