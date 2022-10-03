@@ -1,4 +1,4 @@
-package com.uni.lab3.productsReader;
+package com.uni.lab3.IO.productsReader;
 
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -34,7 +34,7 @@ public class ProductsReader extends AsyncTask<Void, Void, Product[]> {
         StringBuilder stringBuilder = new StringBuilder();
 
         try {
-            String line = "";
+            String line;
             while ((line = bufferedReader.readLine()) != null) {
                 stringBuilder.append(line);
             }

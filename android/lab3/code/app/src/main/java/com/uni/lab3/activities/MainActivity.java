@@ -10,13 +10,16 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.uni.lab3.R;
+import com.uni.lab3.fragments.DeleteDialog;
 import com.uni.lab3.fragments.FullProductInfoFragment;
 import com.uni.lab3.model.Product;
 import com.uni.lab3.model.ProductsRepository;
-import com.uni.lab3.productsReader.ProductsReader;
+import com.uni.lab3.IO.productsReader.ProductsReader;
 import com.uni.lab3.themes.Themes;
 import com.uni.lab3.themes.ThemesUtils;
 
@@ -32,7 +35,7 @@ import java.io.InputStreamReader;
 import java.util.Arrays;
 import java.util.Locale;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements DeleteDialog.DialogListener {
     private ProductsRepository productsRepository;
     private Themes currentTheme = GREEN;
 
@@ -78,6 +81,10 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
+            case R.id.save_products: {
+                writeProducts();
+                return true;
+            }
             case R.id.search:
                 onSearchRequested();
                 return true;
@@ -92,6 +99,27 @@ public class MainActivity extends AppCompatActivity {
                 setMaxPriceQueryText("");
                 return true;
             }
+            // actions
+            case R.id.create_product: {
+                return true;
+            }
+            case R.id.update_product: {
+                return true;
+            }
+            case R.id.delete_product: {
+                DeleteDialog dialogFragment = new DeleteDialog();
+                Bundle bundle = new Bundle();
+                bundle.putSerializable(DeleteDialog.PRODUCT_IDS, Arrays.stream(productsRepository.getAll()).map(Product::getId).mapToInt(i -> i).toArray());
+                bundle.putBoolean(DeleteDialog.NOT_ALERT_DIALOG, true);
+                bundle.putBoolean(DeleteDialog.FULLSCREEN, false);
+                dialogFragment.setArguments(bundle);
+                FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+                removeDeleteDialogFragments();
+                ft.addToBackStack(null);
+                dialogFragment.show(ft, DeleteDialog.SELECT_DIALOG);
+                return true;
+            }
+            // themes
             case R.id.default_theme: {
                 currentTheme = DEFAULT;
                 recreate();
@@ -203,5 +231,44 @@ public class MainActivity extends AppCompatActivity {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private void writeProducts() {
+        // TODO implement ProductsWriter
+    }
+
+    @Override
+    public void onSelectProductIdToDelete(int selectedProductId) {
+        DeleteDialog deleteDialog = new DeleteDialog();
+        Bundle bundle = new Bundle();
+        bundle.putBoolean(DeleteDialog.NOT_ALERT_DIALOG, false);
+        bundle.putBoolean(DeleteDialog.FULLSCREEN, false);
+        bundle.putInt(DeleteDialog.PRODUCT_ID, selectedProductId);
+        bundle.putString(DeleteDialog.ALERT_TITLE, "Confirm deleting");
+        bundle.putString(DeleteDialog.ALERT_MESSAGE, "Delete product with id:");
+        deleteDialog.setArguments(bundle);
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        deleteDialog.show(ft, DeleteDialog.CONFIRMATION_DIALOG);
+    }
+
+    @Override
+    public void onConfirmDeleteProductId(int productId) {
+        productsRepository.removeById(productId);
+        setProductsInListView(productsRepository.getAll());
+    }
+
+    public void removeDeleteDialogFragments() {
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        DialogFragment prevSelectDialog = (DialogFragment) getSupportFragmentManager().findFragmentByTag(DeleteDialog.SELECT_DIALOG);
+        DialogFragment prevConfirmDialog = (DialogFragment) getSupportFragmentManager().findFragmentByTag(DeleteDialog.CONFIRMATION_DIALOG);
+        if (prevSelectDialog != null) {
+            prevSelectDialog.dismiss();
+            ft.remove(prevSelectDialog);
+        }
+        if (prevConfirmDialog != null) {
+            prevConfirmDialog.dismiss();
+            ft.remove(prevConfirmDialog);
+        }
+        ft.commit();
     }
 }

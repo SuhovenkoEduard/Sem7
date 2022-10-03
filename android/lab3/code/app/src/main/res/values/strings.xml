@@ -26,4 +26,11 @@
     <string name="default_theme">Default</string>
     <string name="red">Red</string>
     <string name="green">Green</string>
+    <string name="create">Create</string>
+    <string name="update">Update</string>
+    <string name="delete">Delete</string>
+    <string name="actions">Actions</string>
+    <string name="save">Save</string>
+    <string name="please_select_productid_to_delete">Please select productId to delete:</string>
+    <string name="cancel">Cancel</string>
 </resources>
