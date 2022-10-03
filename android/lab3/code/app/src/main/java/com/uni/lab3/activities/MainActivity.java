@@ -259,15 +259,15 @@ public class MainActivity extends AppCompatActivity implements DeleteDialog.Dial
 
     public void removeDeleteDialogFragments() {
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        DialogFragment prevSelectDialog = (DialogFragment) getSupportFragmentManager().findFragmentByTag(DeleteDialog.SELECT_DIALOG);
-        DialogFragment prevConfirmDialog = (DialogFragment) getSupportFragmentManager().findFragmentByTag(DeleteDialog.CONFIRMATION_DIALOG);
-        if (prevSelectDialog != null) {
-            prevSelectDialog.dismiss();
-            ft.remove(prevSelectDialog);
+        DialogFragment selectProductIdDialog = (DialogFragment) getSupportFragmentManager().findFragmentByTag(DeleteDialog.SELECT_DIALOG);
+        DialogFragment confirmationDialog = (DialogFragment) getSupportFragmentManager().findFragmentByTag(DeleteDialog.CONFIRMATION_DIALOG);
+        if (selectProductIdDialog != null) {
+            selectProductIdDialog.dismiss();
+            ft.remove(selectProductIdDialog);
         }
-        if (prevConfirmDialog != null) {
-            prevConfirmDialog.dismiss();
-            ft.remove(prevConfirmDialog);
+        if (confirmationDialog != null) {
+            confirmationDialog.dismiss();
+            ft.remove(confirmationDialog);
         }
         ft.commit();
     }

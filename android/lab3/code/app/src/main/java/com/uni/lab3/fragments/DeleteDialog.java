@@ -31,6 +31,7 @@ public class DeleteDialog extends DialogFragment {
 
     public static String SELECT_DIALOG = "selectDialog";
     public static String CONFIRMATION_DIALOG = "confirmationDialog";
+
     DialogListener dialogListener;
 
     @NonNull
@@ -42,6 +43,7 @@ public class DeleteDialog extends DialogFragment {
             if (getArguments().getBoolean(NOT_ALERT_DIALOG)) {
                 return super.onCreateDialog(savedInstanceState);
             } else {
+                // alert dialog (confirmation)
                 builder.setTitle(getArguments().getString(ALERT_TITLE));
                 builder.setMessage(getArguments().getString(ALERT_MESSAGE) + " " + getArguments().getInt(PRODUCT_ID));
                 builder.setPositiveButton(OK, (dialog, which) -> {
@@ -64,10 +66,11 @@ public class DeleteDialog extends DialogFragment {
             ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(getContext(), R.layout.list_item, productIds);
             productIdSpinner.setAdapter(arrayAdapter);
 
+            // select dialog
             Button deleteProductButton = view.findViewById(R.id.deleteProductButton);
             deleteProductButton.setOnClickListener(view1 -> dialogListener.onSelectProductIdToDelete(Integer.parseInt(productIdSpinner.getSelectedItem().toString())));
             Button cancelDeletionButton = view.findViewById(R.id.cancelDeletionButton);
-            cancelDeletionButton.setOnClickListener(view12 -> dialogListener.removeDeleteDialogFragments());
+            cancelDeletionButton.setOnClickListener(view12 -> dismiss());
         }
     }
 
