@@ -107,6 +107,7 @@ public class MainActivity extends AppCompatActivity implements DeleteDialog.Dial
                 return true;
             }
             case R.id.delete_product: {
+                if (productsRepository.length() == 0) return true;
                 DeleteDialog dialogFragment = new DeleteDialog();
                 Bundle bundle = new Bundle();
                 bundle.putSerializable(DeleteDialog.PRODUCT_IDS, Arrays.stream(productsRepository.getAll()).map(Product::getId).mapToInt(i -> i).toArray());
@@ -263,11 +264,9 @@ public class MainActivity extends AppCompatActivity implements DeleteDialog.Dial
         DialogFragment confirmationDialog = (DialogFragment) getSupportFragmentManager().findFragmentByTag(DeleteDialog.CONFIRMATION_DIALOG);
         if (selectProductIdDialog != null) {
             selectProductIdDialog.dismiss();
-            ft.remove(selectProductIdDialog);
         }
         if (confirmationDialog != null) {
             confirmationDialog.dismiss();
-            ft.remove(confirmationDialog);
         }
         ft.commit();
     }

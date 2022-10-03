@@ -52,4 +52,8 @@ public class ProductsRepository implements Serializable {
     public int getNextId() {
         return Math.max(0, products.stream().map(Product::getId).mapToInt(i -> i).max().orElse(0)) + 1;
     }
+
+    public int length() {
+        return products.size();
+    }
 }
