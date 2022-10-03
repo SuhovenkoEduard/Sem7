@@ -118,7 +118,7 @@ public class MainActivity extends AppCompatActivity implements DeleteAlertDialog
                 startActivityForResult(intent, CONSTRAINED_SEARCH_RESULT);
                 return true;
             }
-            case R.id.full_list: {
+            case R.id.get_all: {
                 applySearchQuery("");
                 setMaxPriceQueryText("");
                 return true;

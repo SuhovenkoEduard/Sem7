@@ -17,11 +17,11 @@
     <string name="search">Search</string>
     <string name="app_label">app_label</string>
     <string name="search_hint">search_hint</string>
-    <string name="full_list">Full list</string>
+    <string name="get_all">Get all</string>
     <string name="max_price">Max price</string>
     <string name="search_by_name_and_max_price">Search by name and max price</string>
     <string name="name">Name</string>
-    <string name="search_with_price">Search with price</string>
+    <string name="search_by_name_and_price">Search by name and price</string>
     <string name="theme">Theme</string>
     <string name="default_theme">Default</string>
     <string name="red">Red</string>
@@ -42,4 +42,5 @@
     <string name="please_select_product_id">Please select productId</string>
     <string name="io">IO</string>
     <string name="load">Load</string>
+    <string name="search_by_name">Search by name</string>
 </resources>
