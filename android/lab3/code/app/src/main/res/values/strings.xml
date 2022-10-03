@@ -40,4 +40,6 @@
     <string name="universal_product_code">Universal Product Code</string>
     <string name="producer">Producer</string>
     <string name="please_select_product_id">Please select productId</string>
+    <string name="io">IO</string>
+    <string name="load">Load</string>
 </resources>

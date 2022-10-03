@@ -3,8 +3,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <item
-        android:id="@+id/save_products"
-        android:title="@string/save" />
+        android:title="@string/io">
+        <menu>
+            <item
+                android:id="@+id/save_products"
+                android:title="@string/save" />
+            <item
+                android:id="@+id/load_products"
+                android:title="@string/load" />
+        </menu>
+    </item>
     <item
         android:id="@+id/search"
         android:title="@string/search" />

@@ -87,7 +87,7 @@ public class MainActivity extends AppCompatActivity implements DeleteAlertDialog
         if (productsRepository != null) {
             setProductsInListView(productsRepository.getAll());
         } else {
-            readProducts();
+            loadProducts();
         }
     }
 
@@ -103,6 +103,10 @@ public class MainActivity extends AppCompatActivity implements DeleteAlertDialog
         switch (item.getItemId()) {
             case R.id.save_products: {
                 writeProducts();
+                return true;
+            }
+            case R.id.load_products: {
+                loadProducts();
                 return true;
             }
             case R.id.search:
@@ -249,7 +253,7 @@ public class MainActivity extends AppCompatActivity implements DeleteAlertDialog
         }
     }
 
-    private void readProducts() {
+    private void loadProducts() {
         try {
             ProductsReader productsReader = new ProductsReader(
                     MainActivity.this,
