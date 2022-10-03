@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ConstrainedSearch">
+    tools:context=".activities.ConstrainedSearch">
 
     <Button
         android:id="@+id/constrainedSearchButton"
@@ -24,7 +24,8 @@
         android:gravity="center"
         android:text="@string/name"
         app:layout_constraintEnd_toStartOf="@+id/nameInput"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        android:labelFor="@+id/nameInput" />
 
     <TextView
         android:id="@+id/textView"
@@ -48,7 +49,8 @@
         app:layout_constraintEnd_toStartOf="@+id/maxPriceInput"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+        app:layout_constraintTop_toBottomOf="@+id/textView2"
+        android:labelFor="@+id/maxPriceInput" />
 
     <EditText
         android:id="@+id/nameInput"

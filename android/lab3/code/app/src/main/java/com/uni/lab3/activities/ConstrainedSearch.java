@@ -1,4 +1,4 @@
-package com.uni.lab3;
+package com.uni.lab3.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -8,6 +8,10 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.widget.Button;
 import android.widget.EditText;
+
+import com.uni.lab3.R;
+import com.uni.lab3.themes.Themes;
+import com.uni.lab3.themes.ThemesUtils;
 
 public class ConstrainedSearch extends AppCompatActivity {
     private String currentName = "";

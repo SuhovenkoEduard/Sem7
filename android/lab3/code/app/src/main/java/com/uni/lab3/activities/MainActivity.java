@@ -1,11 +1,10 @@
-package com.uni.lab3;
+package com.uni.lab3.activities;
 
-import static com.uni.lab3.Themes.*;
+import static com.uni.lab3.themes.Themes.*;
 
 import android.annotation.SuppressLint;
 import android.app.SearchManager;
 import android.content.Intent;
-import android.content.res.Resources;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -13,9 +12,13 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
+import com.uni.lab3.R;
+import com.uni.lab3.fragments.FullProductInfoFragment;
 import com.uni.lab3.model.Product;
 import com.uni.lab3.model.ProductsRepository;
 import com.uni.lab3.productsReader.ProductsReader;
+import com.uni.lab3.themes.Themes;
+import com.uni.lab3.themes.ThemesUtils;
 
 import android.view.Menu;
 import android.view.MenuItem;

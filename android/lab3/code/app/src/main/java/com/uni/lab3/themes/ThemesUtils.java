@@ -1,4 +1,6 @@
-package com.uni.lab3;
+package com.uni.lab3.themes;
+
+import com.uni.lab3.R;
 
 public class ThemesUtils {
     public static int getThemeId(Themes theme) {

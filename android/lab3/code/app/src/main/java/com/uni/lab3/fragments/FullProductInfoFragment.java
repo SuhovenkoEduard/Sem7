@@ -1,6 +1,5 @@
-package com.uni.lab3;
+package com.uni.lab3.fragments;
 
-import android.app.Activity;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -13,6 +12,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.uni.lab3.activities.MainActivity;
+import com.uni.lab3.R;
 import com.uni.lab3.model.Product;
 
 public class FullProductInfoFragment extends Fragment {
@@ -36,9 +37,7 @@ public class FullProductInfoFragment extends Fragment {
             TextView fullProductInfoTextView = view.findViewById(R.id.fullProductInfoTextView);
             fullProductInfoTextView.setText(product.toString());
             Button clearButton = view.findViewById(R.id.clearButton);
-            clearButton.setOnClickListener((v) -> {
-                mainActivity.removeFullProductInfoFragment(this);
-            });
+            clearButton.setOnClickListener((v) -> mainActivity.removeFullProductInfoFragment(this));
         }
     }
 

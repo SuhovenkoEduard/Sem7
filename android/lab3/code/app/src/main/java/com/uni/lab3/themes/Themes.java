@@ -1,4 +1,4 @@
-package com.uni.lab3;
+package com.uni.lab3.themes;
 
 public enum Themes {
     RED,
