@@ -13,9 +13,9 @@ import java.io.IOException;
 public class ProductsReader extends AsyncTask<Void, Void, Product[]> {
     private final ProgressDialog progressDialog;
     private final BufferedReader bufferedReader;
-    private final ProductsHandlerCallback onStopHandler;
+    private final ProductsReaderHandlerCallback onStopHandler;
 
-    public ProductsReader(Context context, BufferedReader bufferedReader, ProductsHandlerCallback onStopHandler) {
+    public ProductsReader(Context context, BufferedReader bufferedReader, ProductsReaderHandlerCallback onStopHandler) {
         progressDialog = new ProgressDialog(context);
         this.bufferedReader = bufferedReader;
         this.onStopHandler = onStopHandler;
@@ -50,7 +50,7 @@ public class ProductsReader extends AsyncTask<Void, Void, Product[]> {
     @Override
     protected void onPostExecute(Product[] result) {
         super.onPostExecute(result);
-        onStopHandler.handleProducts(result);
+        onStopHandler.handleProductsAfterLoading(result);
         progressDialog.dismiss();
     }
 }

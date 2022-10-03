@@ -14,6 +14,7 @@ import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.uni.lab3.IO.productsWriter.ProductsWriter;
 import com.uni.lab3.R;
 import com.uni.lab3.fragments.DeleteAlertDialog;
 import com.uni.lab3.fragments.FullProductInfoFragment;
@@ -24,6 +25,7 @@ import com.uni.lab3.IO.productsReader.ProductsReader;
 import com.uni.lab3.themes.Themes;
 import com.uni.lab3.themes.ThemesUtils;
 
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
@@ -31,8 +33,10 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.util.Arrays;
 import java.util.Locale;
 
@@ -101,12 +105,12 @@ public class MainActivity extends AppCompatActivity implements DeleteAlertDialog
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.save_products: {
-                writeProducts();
-                return true;
-            }
             case R.id.load_products: {
                 loadProducts();
+                return true;
+            }
+            case R.id.save_products: {
+                saveProducts();
                 return true;
             }
             case R.id.search:
@@ -269,8 +273,18 @@ public class MainActivity extends AppCompatActivity implements DeleteAlertDialog
         }
     }
 
-    private void writeProducts() {
-        // TODO implement ProductsWriter
+    private void saveProducts() {
+        try {
+            ProductsWriter productsWriter = new ProductsWriter(
+                    MainActivity.this,
+                    new BufferedWriter(new OutputStreamWriter(this.openFileOutput("products.json", MODE_PRIVATE))
+                    ),
+                    productsRepository.getAll(),
+                    (result) -> {});
+            productsWriter.execute();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
