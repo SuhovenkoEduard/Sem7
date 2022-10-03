@@ -4,14 +4,16 @@ import androidx.annotation.NonNull;
 
 import java.io.Serializable;
 import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class ProductsRepository implements Serializable {
     private List<Product> products;
 
     public ProductsRepository(Product[] products) {
-        this.products = Arrays.asList(products);
+        this.products = new LinkedList<>(Arrays.asList(products));
     }
 
     public Product[] getAll() {
@@ -28,7 +30,7 @@ public class ProductsRepository implements Serializable {
 
     public void add(Product product) {
         product.setId(getNextId());
-        products.add(product);
+        addByIndex(length(), product);
     }
 
     public void addByIndex(int index, Product product) {
@@ -36,9 +38,11 @@ public class ProductsRepository implements Serializable {
     }
 
     public void update(Product product) {
-        int index = products.indexOf(product);
+        int index = IntStream.range(0, products.size())
+                .filter(i -> product.getId() == products.get(i).getId())
+                .findFirst().orElse(-1);
         remove(product);
-        addByIndex(index, product);
+        products.add(index, product);
     }
 
     public void remove(@NonNull Product product) {

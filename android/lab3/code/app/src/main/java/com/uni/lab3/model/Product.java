@@ -11,6 +11,8 @@ public class Product implements Serializable {
     private int id;
     @SerializedName("name")
     private String name;
+    @SerializedName("universalProductCode")
+    private int universalProductCode;
     @SerializedName("producer")
     private String producer;
     @SerializedName("price")
@@ -20,8 +22,18 @@ public class Product implements Serializable {
     @SerializedName("count")
     private int count;
 
-    public Product(String name, String producer, int price, String expirationDate, int count) {
+    public Product() {
+        this.name = "Sample name";
+        this.universalProductCode = 0;
+        this.producer = "Sample producer";
+        this.price = 0;
+        this.expirationDate = "01.01.2000";
+        this.count = 0;
+    }
+
+    public Product(String name, int universalProductCode, String producer, int price, String expirationDate, int count) {
         this.name = name;
+        this.universalProductCode = universalProductCode;
         this.producer = producer;
         this.price = price;
         this.expirationDate = expirationDate;
@@ -32,6 +44,7 @@ public class Product implements Serializable {
     public Product clone() {
         Product product = new Product(
                 getName(),
+                getUniversalProductCode(),
                 getProducer(),
                 getPrice(),
                 getExpirationDate(),
@@ -55,6 +68,14 @@ public class Product implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public int getUniversalProductCode() {
+        return universalProductCode;
+    }
+
+    public void setUniversalProductCode(int universalProductCode) {
+        this.universalProductCode = universalProductCode;
     }
 
     public String getProducer() {
@@ -103,6 +124,7 @@ public class Product implements Serializable {
         return "Product{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
+                ", universalProductCode=" + universalProductCode +
                 ", producer='" + producer + '\'' +
                 ", price=" + price +
                 ", expirationDate='" + expirationDate + '\'' +

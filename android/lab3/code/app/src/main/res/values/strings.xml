@@ -31,6 +31,13 @@
     <string name="delete">Delete</string>
     <string name="actions">Actions</string>
     <string name="save">Save</string>
-    <string name="please_select_productid_to_delete">Please select productId to delete:</string>
+    <string name="please_select_productid_to_delete">Please select productId to delete</string>
+    <string name="please_select_productid_to_update">Please select productId to update</string>
     <string name="cancel">Cancel</string>
+    <string name="count">Count</string>
+    <string name="expiration_date">Expiration date</string>
+    <string name="price">Price</string>
+    <string name="universal_product_code">Universal Product Code</string>
+    <string name="producer">Producer</string>
+    <string name="please_select_product_id">Please select productId</string>
 </resources>

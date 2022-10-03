@@ -15,8 +15,9 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.uni.lab3.R;
-import com.uni.lab3.fragments.DeleteDialog;
+import com.uni.lab3.fragments.DeleteAlertDialog;
 import com.uni.lab3.fragments.FullProductInfoFragment;
+import com.uni.lab3.fragments.ProductSelectorDialog;
 import com.uni.lab3.model.Product;
 import com.uni.lab3.model.ProductsRepository;
 import com.uni.lab3.IO.productsReader.ProductsReader;
@@ -35,7 +36,26 @@ import java.io.InputStreamReader;
 import java.util.Arrays;
 import java.util.Locale;
 
-public class MainActivity extends AppCompatActivity implements DeleteDialog.DialogListener {
+public class MainActivity extends AppCompatActivity implements DeleteAlertDialog.DialogListener, ProductSelectorDialog.DialogListener {
+    public enum SelectProductIdReasons {
+        DELETE,
+        UPDATE
+    }
+
+    public enum AddEditFormVariants {
+        ADD,
+        EDIT
+    }
+
+    public final static String ADD_EDIT_VARIANT = "add_edit_variant";
+    public final static String PRODUCTS_REPOSITORY = "productsRepository";
+    public final static String CURRENT_THEME = "currentTheme";
+    public final static String REASON = "reason";
+    public final static String PRODUCT = "product";
+    public final static int CONSTRAINED_SEARCH_RESULT = 1;
+    public final static int ADD_PRODUCT_RESULT = 2;
+    public final static int EDIT_PRODUCT_RESULT = 3;
+
     private ProductsRepository productsRepository;
     private Themes currentTheme = GREEN;
 
@@ -43,8 +63,8 @@ public class MainActivity extends AppCompatActivity implements DeleteDialog.Dial
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (savedInstanceState != null) {
-            productsRepository = (ProductsRepository) savedInstanceState.getSerializable("productsRepository");
-            currentTheme = (Themes) savedInstanceState.getSerializable("currentTheme");
+            productsRepository = (ProductsRepository) savedInstanceState.getSerializable(PRODUCTS_REPOSITORY);
+            currentTheme = (Themes) savedInstanceState.getSerializable(CURRENT_THEME);
         }
         setTheme(ThemesUtils.getThemeId(currentTheme));
         setContentView(R.layout.activity_main);
@@ -57,7 +77,7 @@ public class MainActivity extends AppCompatActivity implements DeleteDialog.Dial
             }
 
             Bundle bundle = new Bundle();
-            bundle.putSerializable("product", productsRepository.getByIndex(i));
+            bundle.putSerializable(PRODUCT, productsRepository.getByIndex(i));
             getSupportFragmentManager().beginTransaction()
                 .setReorderingAllowed(true)
                 .add(R.id.fragmentContainerView, FullProductInfoFragment.class, bundle, FullProductInfoFragment.FRAGMENT_TAG)
@@ -90,8 +110,8 @@ public class MainActivity extends AppCompatActivity implements DeleteDialog.Dial
                 return true;
             case R.id.search_with_price: {
                 Intent intent = new Intent(this, ConstrainedSearch.class);
-                intent.putExtra("currentTheme", currentTheme);
-                startActivityForResult(intent, 1);
+                intent.putExtra(CURRENT_THEME, currentTheme);
+                startActivityForResult(intent, CONSTRAINED_SEARCH_RESULT);
                 return true;
             }
             case R.id.full_list: {
@@ -101,23 +121,18 @@ public class MainActivity extends AppCompatActivity implements DeleteDialog.Dial
             }
             // actions
             case R.id.create_product: {
+                Intent intent = new Intent(this, AddEditForm.class);
+                intent.putExtra(CURRENT_THEME, currentTheme);
+                intent.putExtra(ADD_EDIT_VARIANT, AddEditFormVariants.ADD);
+                startActivityForResult(intent, ADD_PRODUCT_RESULT);
                 return true;
             }
             case R.id.update_product: {
+                showProductSelectDialog(SelectProductIdReasons.UPDATE);
                 return true;
             }
             case R.id.delete_product: {
-                if (productsRepository.length() == 0) return true;
-                DeleteDialog dialogFragment = new DeleteDialog();
-                Bundle bundle = new Bundle();
-                bundle.putSerializable(DeleteDialog.PRODUCT_IDS, Arrays.stream(productsRepository.getAll()).map(Product::getId).mapToInt(i -> i).toArray());
-                bundle.putBoolean(DeleteDialog.NOT_ALERT_DIALOG, true);
-                bundle.putBoolean(DeleteDialog.FULLSCREEN, false);
-                dialogFragment.setArguments(bundle);
-                FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-                removeDeleteDialogFragments();
-                ft.addToBackStack(null);
-                dialogFragment.show(ft, DeleteDialog.SELECT_DIALOG);
+                showProductSelectDialog(SelectProductIdReasons.DELETE);
                 return true;
             }
             // themes
@@ -144,20 +159,36 @@ public class MainActivity extends AppCompatActivity implements DeleteDialog.Dial
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 1) {
-            if (data != null) {
-                String name = data.getStringExtra("name");
-                int maxPrice = data.getIntExtra("maxPrice", 0);
-                applySearchWithPriceQuery(name, maxPrice);
-            }
+        if (data == null) return;
+        if (requestCode == CONSTRAINED_SEARCH_RESULT) {
+            String name = data.getStringExtra("name");
+            int maxPrice = data.getIntExtra("maxPrice", 0);
+            applySearchWithPriceQuery(name, maxPrice);
         }
+
+        if (data.getSerializableExtra(PRODUCT) == null) return;
+
+        Product product = (Product) data.getSerializableExtra(PRODUCT);
+        switch (requestCode) {
+            case ADD_PRODUCT_RESULT: {
+                productsRepository.add(product);
+                break;
+            }
+            case EDIT_PRODUCT_RESULT: {
+                productsRepository.update(product);
+                break;
+            }
+            default:
+                throw new IllegalStateException("Unexpected value: " + requestCode);
+        }
+        setProductsInListView(productsRepository.getAll());
     }
 
     @Override
     public void onSaveInstanceState(@NonNull Bundle savedInstanceState) {
         super.onSaveInstanceState(savedInstanceState);
-        savedInstanceState.putSerializable("productsRepository", productsRepository);
-        savedInstanceState.putSerializable("currentTheme", currentTheme);
+        savedInstanceState.putSerializable(PRODUCTS_REPOSITORY, productsRepository);
+        savedInstanceState.putSerializable(CURRENT_THEME, currentTheme);
     }
 
     @Override
@@ -239,20 +270,6 @@ public class MainActivity extends AppCompatActivity implements DeleteDialog.Dial
     }
 
     @Override
-    public void onSelectProductIdToDelete(int selectedProductId) {
-        DeleteDialog deleteDialog = new DeleteDialog();
-        Bundle bundle = new Bundle();
-        bundle.putBoolean(DeleteDialog.NOT_ALERT_DIALOG, false);
-        bundle.putBoolean(DeleteDialog.FULLSCREEN, false);
-        bundle.putInt(DeleteDialog.PRODUCT_ID, selectedProductId);
-        bundle.putString(DeleteDialog.ALERT_TITLE, "Confirm deleting");
-        bundle.putString(DeleteDialog.ALERT_MESSAGE, "Delete product with id:");
-        deleteDialog.setArguments(bundle);
-        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        deleteDialog.show(ft, DeleteDialog.CONFIRMATION_DIALOG);
-    }
-
-    @Override
     public void onConfirmDeleteProductId(int productId) {
         productsRepository.removeById(productId);
         setProductsInListView(productsRepository.getAll());
@@ -260,8 +277,8 @@ public class MainActivity extends AppCompatActivity implements DeleteDialog.Dial
 
     public void removeDeleteDialogFragments() {
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        DialogFragment selectProductIdDialog = (DialogFragment) getSupportFragmentManager().findFragmentByTag(DeleteDialog.SELECT_DIALOG);
-        DialogFragment confirmationDialog = (DialogFragment) getSupportFragmentManager().findFragmentByTag(DeleteDialog.CONFIRMATION_DIALOG);
+        DialogFragment selectProductIdDialog = (DialogFragment) getSupportFragmentManager().findFragmentByTag(DeleteAlertDialog.SELECT_DIALOG);
+        DialogFragment confirmationDialog = (DialogFragment) getSupportFragmentManager().findFragmentByTag(DeleteAlertDialog.DELETE_CONFIRMATION_DIALOG);
         if (selectProductIdDialog != null) {
             selectProductIdDialog.dismiss();
         }
@@ -269,5 +286,51 @@ public class MainActivity extends AppCompatActivity implements DeleteDialog.Dial
             confirmationDialog.dismiss();
         }
         ft.commit();
+    }
+
+    @Override
+    public void onSelectProductId(int selectedProductId, SelectProductIdReasons reason) {
+        switch (reason) {
+            case UPDATE: {
+                FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+                DialogFragment selectProductIdDialog = (DialogFragment) getSupportFragmentManager().findFragmentByTag(DeleteAlertDialog.SELECT_DIALOG);
+                if (selectProductIdDialog != null) {
+                    selectProductIdDialog.dismiss();
+                }
+                ft.commit();
+
+                Intent intent = new Intent(this, AddEditForm.class);
+                intent.putExtra(CURRENT_THEME, currentTheme);
+                intent.putExtra(ADD_EDIT_VARIANT, AddEditFormVariants.EDIT);
+                intent.putExtra(PRODUCT, productsRepository.getById(selectedProductId));
+                startActivityForResult(intent, EDIT_PRODUCT_RESULT);
+                break;
+            }
+            case DELETE: {
+                DeleteAlertDialog deleteAlertDialog = new DeleteAlertDialog();
+                Bundle bundle = new Bundle();
+                bundle.putInt(DeleteAlertDialog.PRODUCT_ID, selectedProductId);
+                bundle.putString(DeleteAlertDialog.ALERT_TITLE, "Confirm deleting");
+                bundle.putString(DeleteAlertDialog.ALERT_MESSAGE, "Delete product with id:");
+                deleteAlertDialog.setArguments(bundle);
+                FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+                deleteAlertDialog.show(ft, DeleteAlertDialog.DELETE_CONFIRMATION_DIALOG);
+                break;
+            }
+            default:
+                throw new IllegalStateException("Unexpected value: " + reason);
+        }
+    }
+
+    public void showProductSelectDialog(SelectProductIdReasons reason) {
+        if (productsRepository.length() == 0) return;
+        ProductSelectorDialog dialogFragment = new ProductSelectorDialog();
+        Bundle bundle = new Bundle();
+        bundle.putSerializable(REASON, reason);
+        bundle.putSerializable(ProductSelectorDialog.PRODUCT_IDS, Arrays.stream(productsRepository.getAll()).map(Product::getId).mapToInt(i -> i).toArray());
+        dialogFragment.setArguments(bundle);
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.addToBackStack(null);
+        dialogFragment.show(ft, ProductSelectorDialog.SELECT_DIALOG);
     }
 }

@@ -22,7 +22,7 @@ public class ConstrainedSearch extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getIntent() != null) {
-            Themes theme = (Themes) getIntent().getSerializableExtra("currentTheme");
+            Themes theme = (Themes) getIntent().getSerializableExtra(MainActivity.CURRENT_THEME);
             setTheme(ThemesUtils.getThemeId(theme));
         }
         setContentView(R.layout.activity_constrained_search);
@@ -71,7 +71,7 @@ public class ConstrainedSearch extends AppCompatActivity {
 
         Button constrainedSearchButton = findViewById(R.id.constrainedSearchButton);
         constrainedSearchButton.setOnClickListener(view -> {
-            this.setResult(1, getResultIntent());
+            this.setResult(MainActivity.CONSTRAINED_SEARCH_RESULT, getResultIntent());
             this.finish();
         });
     }
