@@ -1,0 +1,22 @@
+server:
+shell/watch_and_run_server.sh
+
+client:
+./shell/run_client.sh <ip?>
+
+multiple_clients:
+./shell/run_multiple_clients.sh <ip?>
+
+restore_data:
+./shell/restore_data.sh
+
+Docker:
+1. build:
+docker image rm tcp-ip-app -f
+docker build . -t tcp-ip-app
+
+2. start in docker desktop:
+docker run -p 1337:1337 tcp-ip-app
+
+server_ip inside docker: global ipv4 (from inside the docker container)
+client_ip: 127.0.0.1 || localhost || global ipv4 (from host machine)
