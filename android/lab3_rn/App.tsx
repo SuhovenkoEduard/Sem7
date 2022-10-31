@@ -5,7 +5,7 @@ import { Text, TouchableOpacity, View } from 'react-native'
 import { styles } from './App.styles'
 
 const App = () => {
-  const [isChecked, setIsChecked] = useState<boolean>(true)
+  const [isChecked, setIsChecked] = useState<boolean>(false)
   return (
     <View style={styles.container}>
       <Text>Open up App.js to start working on your app!</Text>
