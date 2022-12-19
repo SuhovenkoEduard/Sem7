@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/search_train"
+        android:orderInCategory="1"
+        android:title="@string/item_menu_show_paris" />
+    <item
+        android:id="@+id/search_train_date"
+        android:orderInCategory="2"
+        android:title="@string/item_menu_show_time" />
+    <item
+        android:id="@+id/refactor_train"
+        android:orderInCategory="3"
+        android:title="@string/item_menu_show_edit" />
+    <item
+        android:id="@+id/delete_train"
+        android:orderInCategory="3"
+        android:title="@string/item_menu_show_delete" />
+
+    <item
+        android:id="@+id/create_train"
+        android:orderInCategory="4"
+        android:title="@string/item_menu_show_add" />
+
+    <item
+        android:id="@+id/save_file_student"
+        android:orderInCategory="5"
+        android:title="Save" />
+</menu>

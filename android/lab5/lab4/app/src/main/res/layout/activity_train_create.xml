@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="500dp">
+
+
+    <LinearLayout
+        android:id="@+id/create_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-medium"
+            android:verticalSpacing="46dp"
+            android:gravity="center"
+            android:text="Destination"
+            android:textSize="25sp" />
+
+        <AutoCompleteTextView
+            android:id="@+id/create_faculty_auto"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-medium"
+            android:verticalSpacing="46dp"
+            android:gravity="center"
+            android:textSize="25sp" />
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-medium"
+            android:verticalSpacing="46dp"
+            android:gravity="center"
+            android:text="Number"
+            android:textSize="25sp" />
+
+        <AutoCompleteTextView
+            android:id="@+id/create_group_auto"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-medium"
+            android:verticalSpacing="46dp"
+            android:gravity="center"
+            android:textSize="25sp" />
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-medium"
+            android:verticalSpacing="46dp"
+            android:gravity="center"
+            android:text="DateArrive (nn-mm-y uu:mm)"
+            android:textSize="25sp" />
+
+        <EditText
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-medium"
+            android:verticalSpacing="46dp"
+            android:gravity="center"
+            android:textSize="25sp" />
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-medium"
+            android:verticalSpacing="46dp"
+            android:gravity="center"
+            android:text="Coupe"
+            android:textSize="25sp" />
+
+        <EditText
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-medium"
+            android:verticalSpacing="46dp"
+            android:gravity="center"
+            android:textSize="25sp" />
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-medium"
+            android:verticalSpacing="46dp"
+            android:gravity="center"
+            android:text="Platskart"
+            android:textSize="25sp" />
+
+        <EditText
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-medium"
+            android:verticalSpacing="46dp"
+            android:gravity="center"
+            android:textSize="25sp" />
+
+        <Button
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:onClick="onButtonClick"
+            android:text="Create train" />
+
+    </LinearLayout>
+</RelativeLayout>

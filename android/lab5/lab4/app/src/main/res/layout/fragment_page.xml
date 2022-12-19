@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+
+    <RelativeLayout
+        android:id="@+id/top_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:gravity="center">
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/content"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@id/top_header"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <ListView
+            android:id="@+id/students_list"
+            android:layout_width="fill_parent"
+            android:layout_height="587dp"
+            android:fontFamily="sans-serif-medium"
+            android:listSelector="#D1D1D1"
+            android:textSize="25sp"
+            android:verticalSpacing="46dp" />
+
+        <Button
+            android:id="@+id/test_a"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Удерживайте чтобы сменить тему" />
+
+    </LinearLayout>
+</RelativeLayout>

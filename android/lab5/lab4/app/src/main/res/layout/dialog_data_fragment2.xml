@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+
+
+    <LinearLayout
+        android:id="@+id/dialog_data2"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-medium"
+            android:verticalSpacing="46dp"
+            android:gravity="center"
+            android:text="Input city"
+            android:textSize="25sp" />
+
+        <EditText
+            android:id="@+id/dialog_data_text_city"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-medium"
+            android:verticalSpacing="46dp"
+            android:gravity="center"
+            android:textSize="25sp" />
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-medium"
+            android:verticalSpacing="46dp"
+            android:gravity="center"
+            android:text="Input time"
+            android:textSize="25sp" />
+
+        <EditText
+            android:id="@+id/dialog_data_text_time"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-medium"
+            android:verticalSpacing="46dp"
+            android:gravity="center"
+            android:textSize="25sp" />
+
+    </LinearLayout>
+</RelativeLayout>
