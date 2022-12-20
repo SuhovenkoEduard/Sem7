@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/search_student_fais"
+        android:orderInCategory="1"
+        android:title="Список студентов Группы" />
+    <item
+        android:id="@+id/search_student_born"
+        android:orderInCategory="2"
+        android:title="Список студентов Г.Р." />
+    <item
+        android:id="@+id/refactor_student"
+        android:orderInCategory="3"
+        android:title="Редактировать" />
+    <item
+        android:id="@+id/delete_student"
+        android:orderInCategory="3"
+        android:title="Удалить" />
+
+    <item
+        android:id="@+id/create_student"
+        android:orderInCategory="4"
+        android:title="Добавить" />
+
+    <item
+        android:id="@+id/save_file_student"
+        android:orderInCategory="5"
+        android:title="Сохранить в файл" />
+
+
+    <item
+        android:id="@+id/google_menu_map"
+        android:orderInCategory="6"
+        android:title="Гугл карта" />
+
+
+</menu>

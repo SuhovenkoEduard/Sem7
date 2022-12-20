@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.lab5v1">
+
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="Выберите"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.Labaratornaya_1">
+        <service
+            android:name=".services.SaveService"
+            android:enabled="true"
+            android:exported="true" />
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyBkcR24Zo-YFkO5HeS8r5fX2ZfVlpQMYoc" />
+
+        <activity
+            android:name=".activity.MapsActivity"
+            android:exported="false"
+            android:label="@string/title_activity_maps" />
+        <activity
+            android:name=".activity.RefactorActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.StudentCreateActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.StudentActivity"
+            android:exported="false" />
+        <activity android:name=".activity.MainActivity" />
+        <activity
+            android:name=".activity.SplashActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>

@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="500dp">
+
+
+    <LinearLayout
+        android:id="@+id/refactor_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical">
+
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-medium"
+            android:gravity="center"
+            android:shadowColor="#7F000000"
+            android:shadowDx="5"
+            android:shadowDy="5"
+            android:shadowRadius="11"
+            android:text="Name student"
+            android:textColor="@color/black"
+            android:textSize="25sp"
+            android:verticalSpacing="46dp" />
+
+        <EditText
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-medium"
+            android:gravity="center"
+            android:shadowColor="#7F000000"
+            android:shadowDx="5"
+            android:shadowDy="5"
+            android:shadowRadius="11"
+            android:textColor="@color/black"
+            android:textSize="25sp"
+            android:verticalSpacing="46dp" />
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-medium"
+            android:gravity="center"
+            android:shadowColor="#7F000000"
+            android:shadowDx="5"
+            android:shadowDy="5"
+            android:shadowRadius="11"
+            android:text="Surname student"
+            android:textColor="@color/black"
+            android:textSize="25sp"
+            android:verticalSpacing="46dp" />
+
+        <EditText
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-medium"
+            android:gravity="center"
+            android:shadowColor="#7F000000"
+            android:shadowDx="5"
+            android:shadowDy="5"
+            android:shadowRadius="11"
+            android:textColor="@color/black"
+            android:textSize="25sp"
+            android:verticalSpacing="46dp" />
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-medium"
+            android:gravity="center"
+            android:shadowColor="#7F000000"
+            android:shadowDx="5"
+            android:shadowDy="5"
+            android:shadowRadius="11"
+            android:text="Born date student"
+            android:textColor="@color/black"
+            android:textSize="25sp"
+            android:verticalSpacing="46dp" />
+
+        <EditText
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-medium"
+            android:gravity="center"
+            android:shadowColor="#7F000000"
+            android:shadowDx="5"
+            android:shadowDy="5"
+            android:shadowRadius="11"
+            android:textColor="@color/black"
+            android:textSize="25sp"
+            android:verticalSpacing="46dp" />
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-medium"
+            android:gravity="center"
+            android:shadowColor="#7F000000"
+            android:shadowDx="5"
+            android:shadowDy="5"
+            android:shadowRadius="11"
+            android:text="Faculties student"
+            android:textColor="@color/black"
+            android:textSize="25sp"
+            android:verticalSpacing="46dp" />
+
+        <AutoCompleteTextView
+            android:id="@+id/refactor_faculty_auto"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-medium"
+            android:gravity="center"
+            android:shadowColor="#7F000000"
+            android:shadowDx="5"
+            android:shadowDy="5"
+            android:shadowRadius="11"
+            android:textColor="@color/black"
+            android:textSize="25sp"
+            android:verticalSpacing="46dp" />
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-medium"
+            android:gravity="center"
+            android:shadowColor="#7F000000"
+            android:shadowDx="5"
+            android:shadowDy="5"
+            android:shadowRadius="11"
+            android:text="Group student"
+            android:textColor="@color/black"
+            android:textSize="25sp"
+            android:verticalSpacing="46dp" />
+
+        <AutoCompleteTextView
+            android:id="@+id/refactor_group_auto"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-medium"
+            android:gravity="center"
+            android:shadowColor="#7F000000"
+            android:shadowDx="5"
+            android:shadowDy="5"
+            android:shadowRadius="11"
+            android:textColor="@color/black"
+            android:textSize="25sp"
+            android:verticalSpacing="46dp" />
+
+        <Button
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@android:color/holo_orange_light"
+            android:onClick="onButtonClickRefactor"
+            android:text="Refactor student"
+            android:textColor="@android:color/background_dark" />
+
+    </LinearLayout>
+</RelativeLayout>

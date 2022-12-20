@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+
+    <!-- HEADER -->
+    <RelativeLayout
+        android:id="@+id/top_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:background="#d4990f"
+        android:gravity="center">
+    </RelativeLayout>
+
+
+    <!-- MAIN PART -->
+    <LinearLayout
+        android:id="@+id/content"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@id/top_header"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/students_list"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+ />
+        <!--        <ListView-->
+        <!--            android:id="@+id/students_list"-->
+        <!--            android:listSelector="@android:color/holo_orange_light"-->
+        <!--            android:layout_width="fill_parent"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:fontFamily="sans-serif-medium"-->
+        <!--            android:verticalSpacing="46dp"-->
+        <!--            android:gravity="center"-->
+        <!--            android:shadowColor="#7F000000"-->
+        <!--            android:shadowDx="5"-->
+        <!--            android:shadowDy="5"-->
+        <!--            android:shadowRadius="11"-->
+        <!--            android:textSize="25sp" />-->
+
+        <Button
+            android:id="@+id/test_a"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Удерживайте что бы сменить тему"
+            android:textColor="@android:color/background_dark" />
+
+    </LinearLayout>
+</RelativeLayout>

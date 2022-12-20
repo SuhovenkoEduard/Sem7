@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">labaratornaya</string>
+    <string-array name="opt">
+        <item name="list_std_1">Выберите</item>
+        <item name="list_std_1">Список студентов ФАИС</item>
+        <item name="list_std_2">Список студентов 2000г.р.</item>
+        <item name="refactor">Редактировать</item>
+        <item name="delete">Удалить</item>
+        <item name="create">Добавить</item>
+    </string-array>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_maps">MapsActivity</string>
+
+</resources>
