@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#317EFB">
+  <link rel="apple-touch-icon" href="icons/icon-128x128.png">
+  <link rel="icon" type="image/png" href="icons/icon-72x72.png"/>
+  <title>Lab Calc</title>
+  <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body>
+
+  <!--  Кнопка меню и заголовок  -->
+  <header id="page_header">
+    <img id="menu_icon" src="icons/menu.svg" onclick="menuState.showMenu()"/>
+    <div id="page_title">Lab Calc</div>
+    <!-- This is unnecessary functionality -->
+    <img id="delete_icon" src="icons/clear.svg" onclick="menuState.clearAllInputs()"/>
+  </header>
+  <!--  *********************  -->
+
+
+  <div class="content">
+
+    <!--  Меню  -->
+    <div id="menu">
+      <button onclick="menuState.showNichiporenko()">Нечипоренко</button>
+      <button onclick="menuState.showSMG()">КА</button>
+      <button onclick="menuState.showLPNP()">ЛПНП</button>
+      <button onclick="menuState.showFibrinogen()">Фибриноген</button>
+    </div>
+    <!--  *********************  -->
+
+
+    <!--  Ничипоренко  -->
+    <div class="calculator" id="Nechiporenko_calculator">
+      <div class="input_box">
+        <div class="input_param">
+          <div class="param_name">X</div>
+          <input type="number" id="input_x" class="input_field" value="">
+        </div>
+      </div>
+
+      <div class="Nichiporenko_results">
+        <div class="result_box">
+          <div class="name_and_result">
+            <div class="result_name">Н1</div>
+            <input type="number" disabled class="result_field" id="n1_result"/>
+          </div>
+          <div class="name_and_result">
+            <div class="result_name">Н2</div>
+            <input type="number" disabled class="result_field" id="n2_result"/>
+          </div>
+          <div class="name_and_result">
+            <div class="result_name">Н4</div>
+            <input type="number" disabled class="result_field" id="n4_result"/>
+          </div>
+          <div class="name_and_result">
+            <div class="result_name">Н16</div>
+            <input type="number" disabled class="result_field" id="n16_result"/>
+          </div>
+        </div>
+
+        <div class="result_box">
+          <div class="name_and_result">
+            <div class="result_name">А1</div>
+            <input type="number" disabled class="result_field" id="a1_result"/>
+          </div>
+          <div class="name_and_result">
+            <div class="result_name">А2</div>
+            <input type="number" disabled class="result_field" id="a2_result"/>
+          </div>
+          <div class="name_and_result">
+            <div class="result_name">А4</div>
+            <input type="number" disabled class="result_field" id="a4_result"/>
+          </div>
+          <div class="name_and_result">
+            <div class="result_name">А16</div>
+            <input type="number" disabled class="result_field" id="a16_result"/>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--  *********************  -->
+
+
+    <!--  СМЖ  -->
+    <div class="calculator" id="SMG_calculator">
+      <div class="input_box">
+        <div class="input_param">
+          <div class="param_name">A</div>
+          <input type="number" id="input_a" class="input_field" value="">
+        </div>
+        <div class="input_param">
+          <div class="param_name">B</div>
+          <input type="number" id="input_b" class="input_field" value="">
+        </div>
+      </div>
+
+      <div class="name_and_result">
+        <div class="result_name">КА</div>
+        <input type="number" disabled class="result_field" id="KA_result"/>
+      </div>
+
+    </div>
+    <!--  *********************  -->
+
+
+    <!--  ЛПНП  -->
+    <div class="calculator" id="LPNP_calculator">
+      <div class="input_box">
+        <div class="input_param">
+          <div class="param_name">ОХС</div>
+          <input type="number" id="input_OXC" class="input_field" value="">
+        </div>
+        <div class="input_param">
+          <div class="param_name">ЛПВП</div>
+          <input type="number" id="input_LPVP" class="input_field" value="">
+        </div>
+        <div class="input_param">
+          <div class="param_name">ТГ</div>
+          <input type="number" id="input_TG" class="input_field" value="">
+        </div>
+      </div>
+
+      <div class="name_and_result">
+        <div class="result_name">ЛПНП</div>
+        <input type="number" disabled class="result_field" id="LPNP_result"/>
+      </div>
+
+    </div>
+    <!--  *********************  -->
+
+
+    <!--  Фибриноген  -->
+    <div class="calculator" id="Fibrinogen_calculator">
+      <div class="input_box">
+        <div class="input_param">
+          <div class="param_name">A</div>
+          <input type="number" id="input_A2" class="input_field" value="">
+        </div>
+        <div class="input_param">
+          <div class="param_name">X</div>
+          <input type="number" id="input_X2" class="input_field" value="">
+        </div>
+      </div>
+
+      <div class="name_and_result">
+        <div class="result_name">F</div>
+        <input type="number" disabled class="result_field" id="F_result"/>
+      </div>
+
+    </div>
+    <!--  *********************  -->
+
+  </div>
+
+  <a class="version" href="https://github.com/Alex-1701/lab_calc" target="_blank">
+    lab calc v2.0.0
+  </a>
+
+</body>
+<script>
+  // Register the service worker
+  if ("serviceWorker" in navigator) {
+    // Wait for the "load" event to not block other work
+    window.addEventListener("load", async () => {
+      // Try to register the service worker.
+      try {
+        // Capture the registration for later use, if needed
+        let reg;
+
+        reg = await navigator.serviceWorker.register("/service-worker.js");
+
+        // console.log("Service worker registered! 😎", reg);
+      } catch (err) {
+        // console.log("😥 Service worker registration failed: ", err);
+      }
+    });
+  }
+</script>
+
+<script src="index.js"></script>
+
+</html>

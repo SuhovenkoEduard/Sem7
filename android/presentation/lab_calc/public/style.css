@@ -1,0 +1,168 @@
+* {
+    font-family: sans-serif;
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    background: #e0e0e0;
+    height: 100%;
+    margin: 0;
+}
+
+.content {
+    background: #e0e0e0;
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+    padding: 20px;
+    align-items: center;
+}
+
+.input_box {
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+}
+
+.input_param {
+    display: flex;
+}
+
+.param_name, .result_name {
+    font-size: 20px;
+    margin-top: auto;
+    margin-bottom: auto;
+    width: 70px;
+    text-align: left;
+    padding-left: 10px;
+}
+
+.input_field, .result_field {
+    font-size: 20px;
+    width: 180px;
+}
+
+.input_field {
+    color: #434343;
+}
+
+.result_field {
+    background: white;
+    color: black;
+    border: none;
+    font-weight: 600;
+    text-align: right;
+    height: 27px;
+}
+
+.name_and_result {
+    display: flex;
+    font-size: 15px;
+    border: 2px solid gray;
+    width: fit-content;
+}
+
+.result_box {
+    display: flex;
+    flex-direction: column;
+    row-gap: 5px;
+}
+
+table {
+    background: #949494;
+    border-collapse: collapse;
+}
+
+td {
+    width: 50%;
+    background: #e0e0e0;
+    padding: 0;
+}
+
+.version {
+    position: absolute;
+    right: 20px;
+    display: flex;
+    column-gap: 5px;
+    font-size: 10px;
+    color: #c0c0c0;
+    align-items: center;
+    text-decoration: none;
+}
+
+.calculator {
+    flex-direction: column;
+    row-gap: 25px;
+    display: none;
+}
+
+.Nichiporenko_results {
+    display: flex;
+    flex-direction: column;
+    row-gap: 30px;
+}
+
+#clear_button {
+    display: none;
+}
+
+#menu {
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+    padding: 5px;
+}
+
+#menu > button {
+    font-size: 25px;
+    padding: 5px;
+    border: 2px solid gray;
+    border-radius: 7px;
+    background-color: #f2f2f2;
+    padding-left: 35px;
+    padding-right: 35px;
+}
+
+#menu_button {
+    display: none;
+    font-size: 25px;
+    padding: 5px;
+    justify-content: center;
+}
+
+#page_header {
+    display: flex;
+    justify-content: space-between;
+    font-size: 20px;
+    background: #c2c2c2;
+    height: 40px;
+    position: static;
+}
+
+#menu_icon, #delete_icon {
+    position: absolute;
+    cursor: pointer;
+}
+
+#menu_icon {
+    left: 0;
+    padding: 3px;
+    margin: 5px;
+}
+
+#delete_icon {
+    right: 0;
+    margin: 3px;
+}
+
+#page_title {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #515151;
+    font-weight: bold;
+}
